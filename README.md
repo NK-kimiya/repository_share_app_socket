@@ -77,7 +77,7 @@ MongoDB Atlas のクラスタに接続し、下記のようなスキーマを使
 ```bash
 git clone https://github.com/NK-kimiya/repository_share_app_socket.git
 cd repository_share_app_socket
-
+``
 ### 2. MongoDB 接続URLの設定
 
 ※まだMongoDBを持っていない場合は、MongoDB Atlasに無料登録してクラスタを作成することで接続URIを取得できます。
