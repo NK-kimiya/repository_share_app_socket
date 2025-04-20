@@ -109,5 +109,15 @@ npm install
 ### 4. サーバーの起動
 npm start
 
+## 🔗 関連リポジトリ
+
+このリポジトリは、リアルタイム通信（既読数の管理など）を担当する Express サーバーです。  
+他にも以下の関連リポジトリがあります：
+
+- 🎨 フロントエンド（React）
+  - [https://github.com/NK-kimiya/repository_share_app_front](https://github.com/NK-kimiya/repository_share_app_front.git)
+- 🧠 バックエンドAPI（Django + BERT分類）
+  - [https://github.com/NK-kimiya/repository_share_app_api](https://github.com/NK-kimiya/repository_share_app_api.git)
+
 
 
