@@ -7,12 +7,12 @@ const mongoose = require('mongoose');
 
 
 mongoose.connect(
-  'mongodb+srv://kinarishige26:test1234@cluster0.upwnupu.mongodb.net/chat-app?retryWrites=true&w=majority&appName=Cluster0',
+  'MONGO_URL',
   { useNewUrlParser: true, useUnifiedTopology: true }
 ).then(() => {
-  console.log('MongoDB Atlas 接続成功');
+
 }).catch((err) => {
-  console.error('MongoDB Atlas 接続失敗:', err);
+
 });
 
 //モデルの作成
@@ -55,11 +55,8 @@ app.use(cors());
 app.use(express.json());
 //新しいクライアントが接続されたときの処理
 io.on('connection', (socket) => {
-  console.log('クライアント接続:', socket.id);//接続したクライアントの表示
-  
   //クライアントからデータが送られた時
   socket.on('send_message', async(data) => {
-    console.log('📩 メッセージ受信:', data);
 
   try {
     // readCount を +1 更新
@@ -78,7 +75,6 @@ io.on('connection', (socket) => {
     data.readCount = updatedStatus?.readCount ?? 0;
 
   } catch (err) {
-    console.error('📛 MongoDBの更新/取得に失敗:', err);
     data.readCount = 0; // エラー時は0を返しておく
   }
 
@@ -88,14 +84,13 @@ io.on('connection', (socket) => {
 
   //クライアントがブラウザを閉じたり、接続を切ったとき
   socket.on('disconnect', () => {
-    console.log('クライアント切断:', socket.id);
   });
 });
 
 // JSON形式のリクエストボディをパースする
 app.use(express.json());
 
-// テスト用のデータを挿入するルート
+//ユーザー名とリポジトリ名で通知のカウントのドキュメントを作成
 app.post('/create-read-status', async (req, res) => {
   const { roomId, username, readCount } = req.body;
 
@@ -114,10 +109,10 @@ app.post('/create-read-status', async (req, res) => {
         const saved = await newStatus.save();
         createdStatuses.push(saved);
       } else {
-        console.log(`既に存在: roomId=${id}, username=${username}`);
+   
       }
     } catch (err) {
-      console.error(`作成中にエラー: roomId=${id}`, err);
+
     }
   }
 
@@ -129,12 +124,9 @@ app.post('/create-read-status', async (req, res) => {
 });
 
 
-
+//ユーザー名とリポジトリ名の両方に対応する通知のカウント数をレスポンス
 app.post('/read_count_filter', async (req, res) => {
   const { repository_ids, username } = req.body;
-
-  console.log('📩 受信したユーザー名:', username);
-  console.log('📦 repository_ids:', repository_ids);
 
   try {
     const results = await ReadStatus.find({
@@ -147,10 +139,26 @@ app.post('/read_count_filter', async (req, res) => {
       data: results
     });
   } catch (error) {
-    console.error('📛 MongoDB検索エラー:', error);
     res.status(500).json({ error: '検索エラー' });
   }
 });
+
+app.post('/delete_count', async (req, res) => {
+  console.log("リクエストで受取ったデータ：", req.body);
+  const { username, roomId } = req.body;
+
+  try {
+    const result = await ReadStatus.updateOne(
+      { username, roomId },
+      { $set: { readCount: 0 } }
+    );
+
+    res.status(200).json({ message: 'readCountを0に更新しました', result });
+  } catch (err) {
+    res.status(500).json({ error: '更新エラー', details: err });
+  }
+});
+
 server.listen(4000, () => {
   console.log('サーバー起動: http://localhost:4000');
 });
