@@ -70,7 +70,12 @@ MongoDB Atlas のクラスタに接続し、下記のようなスキーマを使
 
 ## ⚙️ セットアップ方法（Node.js / Express サーバー）
 
-このプロジェクトは、Socket.io + MongoDB を使ったリアルタイム通知APIを提供する Express サーバーです。以下の手順でローカルで動作確認が可能です。
+このプロジェクトは、Socket.io + MongoDB を使ったリアルタイム通知APIを提供する Express サーバーです。以下の手順でローカルで動作確認が可能です。　
+
+・動作確認環境　
+
+node.js → v22.14.0　
+npm　→　v10.9.2
 
 ### 1. リポジトリをクローン
 
@@ -89,7 +94,7 @@ https://www.mongodb.com/ja-jp/docs/atlas/getting-started/
 `server.js` の以下の部分の `"MONGO_URL"` を、**自分のMongoDB接続URIに置き換えてください**：
 
 ```js
-mongoose.connect("MONGO_URL", {
+mongoose.connect('MONGO_URL', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
