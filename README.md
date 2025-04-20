@@ -55,7 +55,7 @@ React側の「リアルタイム掲示板」に対して：
 | `mongoose`     | MongoDBと接続し、既読情報をスキーマ管理     |
 | `cors`         | フロントエンド（React）からのアクセス許可  |
 
----
+
 
 ## 🗃 使用データベース：MongoDB（Atlas）
 
@@ -68,7 +68,7 @@ MongoDB Atlas のクラスタに接続し、下記のようなスキーマを使
   readCount: Number   // 既読件数（新規投稿が来るたび+1）
 }
 
----
+
 
 ## ⚙️ セットアップ方法（Node.js / Express サーバー）
 
