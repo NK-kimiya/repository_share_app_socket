@@ -64,6 +64,7 @@ MongoDB Atlas のクラスタに接続し、下記のようなスキーマを使
   username: String,   // 利用者の名前
   readCount: Number   // 既読件数（新規投稿が来るたび+1）
 }
+```
 
 
 
@@ -93,7 +94,7 @@ mongoose.connect("MONGO_URL", {
 }).then(() => {
   console.log('MongoDB connected');
 });
-
+```
 
 
 ### 3. 依存パッケージのインストール
