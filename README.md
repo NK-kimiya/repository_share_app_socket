@@ -67,3 +67,44 @@ MongoDB Atlas のクラスタに接続し、下記のようなスキーマを使
   username: String,   // 利用者の名前
   readCount: Number   // 既読件数（新規投稿が来るたび+1）
 }
+
+
+## ⚙️ セットアップ方法（Node.js / Express サーバー）
+
+このプロジェクトは、Socket.io + MongoDB を使ったリアルタイム通知APIを提供する Express サーバーです。以下の手順でローカルで動作確認が可能です。
+
+---
+
+### 1. リポジトリをクローン
+
+```bash
+git clone https://github.com/NK-kimiya/repository_share_app_socket.git
+cd repository_share_app_socket
+
+### 2. MongoDB 接続URLの設定
+
+※まだMongoDBを持っていない場合は、MongoDB Atlasに無料登録してクラスタを作成することで接続URIを取得できます。
+https://www.mongodb.com/ja-jp/docs/atlas/getting-started/
+
+このプロジェクトでは、MongoDB Atlas に接続するために、以下のように接続URLを指定します。
+
+`server.js` の以下の部分の `"MONGO_URL"` を、**自分のMongoDB接続URIに置き換えてください**：
+
+```js
+mongoose.connect("MONGO_URL", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('MongoDB connected');
+});
+
+
+
+### 3. 依存パッケージのインストール
+npm install
+
+### 4. サーバーの起動
+npm start
+
+
+
