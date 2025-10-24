@@ -2,7 +2,7 @@
 
 デモの紹介サイト　
 
-https://kimikou-blog.jp/portfolio/
+https://kimiyasu.com/2024/05/17/sample_01/
 
 ## 🎯 目的・背景
 
